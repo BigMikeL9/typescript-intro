@@ -20,14 +20,6 @@ isLoggedIn = true;
 
 // ----------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------
-// ---- setting 'Primitive' type assignments to FUNCTION PARAMETERS
-
-const subtract = (a: number, b: number) => {
-  return a - b;
-};
-
-// ----------------------------------------------------------------------------------------------------------------------------
-// ----------------------------------------------------------------------------------------------------------------------------
 // ---- setting 'Reference' type assignments to ....
 
 // ---------------------------
@@ -102,4 +94,67 @@ course = ["React", "Web Dev", "LULULUL"];
 
 // ----------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------
-// ----
+// ---- 'Type Aliases'  -  Reusable Types    🛑 DONT USE 🛑
+
+// 'Type Alias'
+type Dog = {
+  type: string;
+  age: number;
+  isRare: boolean;
+};
+
+// ---
+const husky: Dog = {
+  type: "husky",
+  age: 10,
+  isRare: false,
+};
+
+// ---
+let dogs: Dog[];
+
+dogs = [
+  { type: "husky", age: 10, isRare: false },
+  { type: "German Shepherd", age: 6, isRare: true },
+];
+
+// ---------------------------------------------------
+// ---- 'Interface'  -  Reusable Types    🌟 USE THIS 🌟
+
+// 🌟 NOTE: interface does NOT need an equal sign
+interface Cat {
+  color: string;
+  age?: number; // Optional Property
+  isRare?: boolean; // Optional Property
+}
+
+const cat: Cat = {
+  color: "black",
+  age: 10,
+};
+
+// ----------------------------------------------------------------------------------------------------------------------------
+// ---- 'Functions & Types' in typescript
+// -----------------------------------
+
+// Setting types for function Parameters 👇
+// ⭐⭐ Typescript does NOT only use types for the parameters, but ALSO for the RETURNED value of the function.
+// its best practice to let 'Type Inference' automatically set the type for the return function value depending on its parameters types, UNLESS we have a reason otherwise and in that case we can define function returned values as shown below.
+
+const subtract = (a: number, b: number): number | string => {
+  // return value is inferred by Typescript through 'Type Inference' feature. So typescript automatically assigns the type 'number' to the return value.
+  return a - b;
+};
+
+// ---
+// There is a special return type ONLY for functions that does NOT return anything. For instance for a function that just 'console.log' a value 👇
+// that special returned type is 'void'. 'void' type is basically comparable to 'null' and 'undefined' but ONLY used in conjunction with functions, and it means that that function never returns.
+
+// REMEMBER: dont need to specify parameter or returned value type due to 'Type Inference' in typescript
+const printToConsole = (a: any): void => {
+  console.log(a);
+};
+
+// ----------------------------------------------------------------------------------------------------------------------------
+// ---- 'Generic Types' in typescript
+// -----------------------------------
