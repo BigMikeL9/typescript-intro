@@ -141,6 +141,7 @@ const cat: Cat = {
 // ⭐⭐ Typescript does NOT only use types for the parameters, but ALSO for the RETURNED value of the function.
 // its best practice to let 'Type Inference' automatically set the type for the return function value depending on its parameters types, UNLESS we have a reason otherwise and in that case we can define function returned values as shown below.
 
+//                                           👇👇  -->  RETURNED value 'union type'
 const subtract = (a: number, b: number): number | string => {
   // return value is inferred by Typescript through 'Type Inference' feature. So typescript automatically assigns the type 'number' to the return value.
   return a - b;
@@ -158,3 +159,15 @@ const printToConsole = (a: any): void => {
 // ----------------------------------------------------------------------------------------------------------------------------
 // ---- 'Generic Types' in typescript
 // -----------------------------------
+
+// 'Genrics' lets us create functions or variables that are type safe, yet flexible.
+// So instead of using 'any' to make a function or variable flexible, we use '<{type name}>' so that typescript can detect and add type to our returned value through 'type inference'
+
+const insertAtBeginning = <Type>(array: Type[], value: Type) => {
+  const newArray = [value, ...array];
+  return newArray;
+};
+
+const numbersArray = insertAtBeginning([1, 2, 3, 4], 0);
+const stringsArray = insertAtBeginning(["a", "b", "c", "d"], "i");
+const combinedArray = insertAtBeginning(["a", 2, "c", 3], "i");
